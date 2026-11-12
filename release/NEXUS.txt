@@ -1,0 +1,52 @@
+=== NAME ===
+Skills Pack
+
+=== SHORT DESCRIPTION (summary) ===
+Five skills in one mod: Scavenging, Haggling, Bribery+, Stealth and Fraud (Scam Artist). Real skills on the Character tab with XP, levels and level 10 perks. Replaces the five separate mods; saves and settings carry over.
+
+=== FILE DESCRIPTION ===
+Obenseuer-SkillsPack-v1.0.0.rar : Skills Pack 1.0.0 for BepInEx 6. Extract into the Obenseuer folder. Delete the old separate skill mods first.
+
+=== CHANGELOG ===
+1.0.0
+- First release: Scavenger, Haggling, Bribery+, Stealth and Scam Artist in one mod.
+- Scam Artist: frozen bank accounts unfreeze on their own after 7 in-game days.
+- On/off switch per skill.
+
+=== FULL DESCRIPTION (BBCode) ===
+[size=5][b]Skills Pack[/b][/size]
+[i]Five skill mods for Obenseuer in one download.[/i]
+
+This pack replaces my separate mods [b]Scavenger[/b], [b]Haggling[/b], [b]Bribery+[/b], [b]Stealth[/b] and [b]Scam Artist[/b]. Every skill shows on the Character tab like the game's own skills, starts unlearned, and uses the game's "New skill learned" and level-up popups.
+
+[size=4][b]The skills[/b][/size]
+[list]
+[*][b]Scavenging[/b]: search trash containers to level up. Higher levels dig up extra, and better, items. Masks and a crowbar help; darkness without a light hurts. [i]Level 10, Trash King:[/i] a chance of rare finds.
+[*][b]Haggling[/b]: every trade with a trader gives XP. Up to 12% off what you buy and 12% more for what you sell. [i]Level 10, Silver Tongue:[/i] traders buy stolen goods from you.
+[*][b]Bribery+[/b]: look at a person and press [b]B[/b] to ask for money, using the game's Bribery skill. People differ, police pay more but are harder, and failing can offend them or get you reported.
+[*][b]Stealth[/b]: XP for stealing, lockpicking and trespassing unseen. People and cameras notice you less (up to 50%), more so when crouching or in the dark. [i]Level 10, Shadow:[/i] crimes you're caught for count as less serious.
+[*][b]Fraud (Scam Artist)[/b]: scam invoices play out over days. See your odds and payout on each invoice, read the companies' replies in the scam ledger ([b]F7[/b]), send follow-ups, and bribe, settle or lay low when reported. [b]New:[/b] a frozen bank account unfreezes on its own after 7 in-game days.
+[/list]
+
+[size=4][b]Coming from the separate mods[/b][/size]
+[list]
+[*][b]Delete the old DLLs[/b] from BepInEx/plugins (Obenseuer-Scavenger, -Haggling, -BriberyPlus, -Stealth, -ScamArtist). The pack warns in the log if one is still there.
+[*][b]Your saves carry over:[/b] skill levels, XP and the scam ledger.
+[*][b]Your settings carry over:[/b] each skill keeps its own config file.
+[/list]
+
+[size=4][b]Configuration[/b][/size]
+[list]
+[*][i]JuanBerta.Obenseuer.SkillsPack.cfg[/i]: an on/off switch per skill (restart needed). A switched-off skill keeps its progress.
+[*]Each skill's numbers are in its own file ([i]JuanBerta.Obenseuer.Scavenger.cfg[/i], [i]...Haggling.cfg[/i], and so on), or in ConfigurationManager.
+[/list]
+
+[size=4][b]Compatibility[/b][/size]
+[list]
+[*]Requires BepInEx 6 (be.697 or newer).
+[*]Works with Loot Map (searched-trash markers), Special Orders (Haggling bonus) and Diegetic UI.
+[*]Don't install it together with the separate skill mods.
+[/list]
+
+[size=4][b]Installation[/b][/size]
+Extract the archive into the Obenseuer game folder. The DLL ends up in [i]BepInEx/plugins/Obenseuer-SkillsPack/[/i].
