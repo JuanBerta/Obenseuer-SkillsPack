@@ -1,12 +1,13 @@
 # Obenseuer Skills Pack
 
-Five skill mods for Obenseuer in one BepInEx 6 mod. It replaces the separate Scavenger, Haggling, Bribery+, Stealth and Scam Artist mods.
+Skill mods for Obenseuer in one BepInEx 6 mod. It replaces the separate Scavenger, Haggling, Bribery+, Stealth and Scam Artist mods.
 
 | Skill | What it adds |
 |---|---|
 | **Scavenging** (Scavenger) | Search trash to level up; higher levels find more, and better, loot. Gear and light matter. Level 10: Trash King. |
 | **Haggling** | XP from trading; up to 12% better buy and sell prices. Level 10: Silver Tongue (traders buy stolen goods). |
 | **Bribery+** | Look at a person and press B to ask for money, using the game's Bribery skill. |
+| **Lockpick Learning** | The game's own Lockpicking skill grows faster from failed attempts (FailureShare) and when drunk or high (ImpairedBonus). |
 | **Stealth** | XP for stealing, lockpicking and trespassing unseen; people and cameras notice you less. Level 10: Shadow. |
 | **Fraud** (Scam Artist) | Scam invoices that play out over days, with odds on the invoice, a scam ledger (F7), follow-ups, investigations, and frozen accounts that unfreeze on their own after 7 days. |
 

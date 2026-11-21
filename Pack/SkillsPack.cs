@@ -8,11 +8,11 @@ using BepInEx.Logging;
 using UnityEngine;
 
 [assembly: AssemblyTitle("Obenseuer-SkillsPack")]
-[assembly: AssemblyDescription("Skills Pack for Obenseuer: Scavenger, Haggling, Bribery+, Stealth and Scam Artist in one mod.")]
+[assembly: AssemblyDescription("Skills Pack for Obenseuer: Scavenger, Haggling, Bribery+, Stealth, Scam Artist and Lockpick Learning and XP Tiers in one mod.")]
 [assembly: AssemblyCompany("JuanBerta")]
 [assembly: AssemblyProduct("Obenseuer Skills Pack")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]
 
 namespace SkillsPackMod
 {
@@ -23,7 +23,7 @@ namespace SkillsPackMod
 	/// </summary>
 	internal static class SkillsPack
 	{
-		public const string Version = "1.0.0";
+		public const string Version = "1.2.0";
 
 		private static ConfigFile cfg;
 		private static ManualLogSource log;
@@ -36,6 +36,8 @@ namespace SkillsPackMod
 			new[] { "BriberyPlus", "Bribery+: more ways and better odds to bribe your way out of trouble." },
 			new[] { "Stealth", "Stealth: sneak, steal and stay unseen more easily as you level up." },
 			new[] { "ScamArtist", "Scam Artist: the Fraud skill and scam invoices that play out over days." },
+			new[] { "LockpickLearning", "Lockpick Learning: the Lockpicking skill grows faster from failed attempts and when drunk or high." },
+			new[] { "XPTiers", "XP Tiers: recipes give more skill XP the rarer their result is, and mining, jobs, sauna, drinking and building give much more XP." },
 		};
 
 		private static void Init()
