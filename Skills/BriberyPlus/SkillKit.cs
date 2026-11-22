@@ -31,6 +31,16 @@ namespace BriberyPlusMod
 		protected abstract string SaveGuid { get; }
 		protected abstract string SaveTitle { get; }
 
+		public string BackupId { get { return SaveGuid; } }
+
+		// Keep a second copy of the progress (memory + file), so a reload with missing or older data cannot lose it.
+		public void Backup(bool force)
+		{
+			string who = SkillHost.NormalizeCharacter(ownerCharacter);
+			if (string.IsNullOrEmpty(who)) who = SkillHost.CurrentCharacter();
+			SkillsPackMod.SkillBackup.Put(who, SaveGuid, skillXp, force);
+		}
+
 		public void ResetSkill(string owner)
 		{
 			skillXp = 0f;
@@ -57,17 +67,37 @@ namespace BriberyPlusMod
 		public override bool OnSavingGameSpecial()
 		{
 			storageSlots = new StorageSlot[0];
+			Backup(true);
 			return SaveController.SerializeData(this, global);
 		}
 
 		public override bool OnLoadingGameSpecial()
 		{
+			// What is in memory before the game's data is read back (this object lives through reloads).
+			string prevOwner = SkillHost.NormalizeCharacter(ownerCharacter);
+			float prevXp = skillXp;
 			bool ok = SaveController.DeSerializeData(this, global);
 			storageSlots = new StorageSlot[0];
 			Slots = new SlotController[0];
-			if (!ok) ResetSkill(SkillHost.CurrentCharacter());
+			string who = SkillHost.CurrentCharacter();
+			string owner = ok ? SkillHost.NormalizeCharacter(ownerCharacter) : null;
+			if (string.IsNullOrEmpty(who)) who = !string.IsNullOrEmpty(owner) ? owner : prevOwner;
+			// Data that belongs to somebody else is left to CheckOwner. Otherwise progress can only go up.
+			if (!ok || string.IsNullOrEmpty(owner) || owner == who)
+			{
+				float loaded = ok ? skillXp : 0f;
+				float best = SkillsPackMod.SkillBackup.Best(who, SaveGuid, loaded, prevOwner == who ? prevXp : 0f);
+				if (!ok) ResetSkill(who);
+				if (best > skillXp)
+				{
+					SkillsPackMod.SkillBackup.Log(SaveTitle + ": the save had " + Mathf.FloorToInt(loaded) + " XP for '" + who + "', kept " + Mathf.FloorToInt(best) + " XP from the backup.");
+					skillXp = best;
+				}
+				if (!string.IsNullOrEmpty(who)) ownerCharacter = who;
+			}
 			loadedFromSave = true;
 			parsed = null;
+			Backup(false);
 			return ok;
 		}
 
@@ -148,7 +178,7 @@ namespace BriberyPlusMod
 		internal float Xp
 		{
 			get { return SkillHost.Save != null ? SkillHost.Save.skillXp : 0f; }
-			set { if (SkillHost.Save != null) SkillHost.Save.skillXp = Mathf.Max(0f, value); }
+			set { if (SkillHost.Save != null) { SkillHost.Save.skillXp = Mathf.Max(0f, value); SkillHost.Save.Backup(false); } }
 		}
 
 		internal bool Learned { get { return Xp > 0f; } }
@@ -301,7 +331,7 @@ namespace BriberyPlusMod
 			TimeOfDayAzure.DayChanged += OnDayChanged;
 			SaveController.LoadingDone += OnGameLoaded;
 			EnsureSaveObject();
-			Harmony.CreateAndPatchAll(typeof(Hooks));
+			SkillsPackMod.SafePatch.All(typeof(Hooks), "JuanBerta.Obenseuer.Skill." + objectName, log);
 		}
 
 		// Call from the plugin's Update.
@@ -354,6 +384,16 @@ namespace BriberyPlusMod
 			if (save.loadedFromSave)
 			{
 				save.ownerCharacter = current;
+				return;
+			}
+			// The save object was just created empty (a reload destroyed it) and there is a backup for this character: restore it.
+			float backed = SkillsPackMod.SkillBackup.Get(current, save.BackupId);
+			if (string.IsNullOrEmpty(save.ownerCharacter) && backed > 0f)
+			{
+				save.ResetSkill(current);
+				save.skillXp = backed;
+				save.dayKey = CurrentDayKey();
+				LogInfo((Skill != null ? Skill.Name : "Skill") + ": restored " + Mathf.FloorToInt(backed) + " XP for '" + current + "' from the backup.");
 				return;
 			}
 			save.ResetSkill(current);

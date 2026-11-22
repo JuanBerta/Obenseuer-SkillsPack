@@ -35,7 +35,7 @@ namespace HagglingMod
 			Bind(Config);
 			Skill.CardNote = CardNote;
 			SkillHost.Init(this, Logger, Skill, "Haggling_Save", go => go.AddComponent<HagglingSave>());
-			Harmony.CreateAndPatchAll(typeof(Hooks));
+			SkillsPackMod.SafePatch.All(typeof(Hooks), "JuanBerta.Obenseuer.Haggling.hooks", Logger);
 			Logger.LogInfo("Haggling loaded.");
 		}
 

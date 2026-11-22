@@ -27,6 +27,15 @@ namespace ScavengeTimerMod
 		// Set when this object's data was read from the current save (not saved).
 		[System.NonSerialized] public bool loadedFromSave;
 
+		public string BackupId { get { return StashGUID; } }
+
+		public void Backup(bool force)
+		{
+			string who = ScavengerPlugin.NormalizeCharacter(ownerCharacter);
+			if (string.IsNullOrEmpty(who)) who = ScavengerPlugin.CurrentCharacter();
+			SkillsPackMod.SkillBackup.Put(who, StashGUID, skillXp, force);
+		}
+
 		public void ResetSkill(string owner)
 		{
 			skillXp = 0f;
@@ -58,17 +67,37 @@ namespace ScavengeTimerMod
 		{
 			// The old stash's items are not kept: the stash no longer exists.
 			storageSlots = new StorageSlot[0];
+			Backup(true);
 			return SaveController.SerializeData(this, global);
 		}
 
 		public override bool OnLoadingGameSpecial()
 		{
+			// What is in memory before the game's data is read back (this object lives through reloads).
+			string prevOwner = ScavengerPlugin.NormalizeCharacter(ownerCharacter);
+			float prevXp = skillXp;
 			bool ok = SaveController.DeSerializeData(this, global);
 			storageSlots = new StorageSlot[0];
 			Slots = new SlotController[0];
-			// A save without Scavenger data (older save, or one from before the mod) starts the skill at 0.
-			if (!ok) ResetSkill(ScavengerPlugin.CurrentCharacter());
+			string who = ScavengerPlugin.CurrentCharacter();
+			string owner = ok ? ScavengerPlugin.NormalizeCharacter(ownerCharacter) : null;
+			if (string.IsNullOrEmpty(who)) who = !string.IsNullOrEmpty(owner) ? owner : prevOwner;
+			// Data that belongs to somebody else is left to CheckOwner. Otherwise progress can only go up:
+			// a save without Scavenger data, or an older one, keeps the XP the character already had.
+			if (!ok || string.IsNullOrEmpty(owner) || owner == who)
+			{
+				float loaded = ok ? skillXp : 0f;
+				float best = SkillsPackMod.SkillBackup.Best(who, StashGUID, loaded, prevOwner == who ? prevXp : 0f);
+				if (!ok) ResetSkill(who);
+				if (best > skillXp)
+				{
+					SkillsPackMod.SkillBackup.Log("Scavenger: the save had " + Mathf.FloorToInt(loaded) + " XP for '" + who + "', kept " + Mathf.FloorToInt(best) + " XP from the backup.");
+					skillXp = best;
+				}
+				if (!string.IsNullOrEmpty(who)) ownerCharacter = who;
+			}
 			loadedFromSave = true;   // the data in memory now belongs to this save (even if it had no Scavenger data)
+			Backup(false);
 			return ok;
 		}
 

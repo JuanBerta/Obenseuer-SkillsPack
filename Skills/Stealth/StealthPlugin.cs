@@ -54,7 +54,7 @@ namespace StealthMod
 			Bind(Config);
 			Skill.CardNote = () => "-" + Mathf.RoundToInt((1f - DetectionFactor(false)) * 100f) + "% seen now";
 			SkillHost.Init(this, Logger, Skill, "Stealth_Save", go => go.AddComponent<StealthSave>());
-			Harmony.CreateAndPatchAll(typeof(Hooks));
+			SkillsPackMod.SafePatch.All(typeof(Hooks), "JuanBerta.Obenseuer.Stealth.hooks", Logger);
 			PatchFov(new Harmony("JuanBerta.Obenseuer.Stealth.fov"));
 			SceneManager.sceneLoaded += (s, m) => areas = null;
 			Logger.LogInfo("Stealth loaded.");

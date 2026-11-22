@@ -62,9 +62,9 @@ namespace ScamArtistMod
 			Bind(Config);
 			Skill.CardNote = CardNote;
 			SkillHost.Init(this, Logger, Skill, "ScamArtist_Save", go => go.AddComponent<ScamArtistSave>());
-			Harmony.CreateAndPatchAll(typeof(Hooks));
-			Harmony.CreateAndPatchAll(typeof(LedgerBlockBool));
-			Harmony.CreateAndPatchAll(typeof(LedgerBlockAxis));
+			SkillsPackMod.SafePatch.All(typeof(Hooks), "JuanBerta.Obenseuer.ScamArtist.hooks", Logger);
+			try { Harmony.CreateAndPatchAll(typeof(LedgerBlockBool)); } catch (Exception e) { Logger.LogWarning("LedgerBlockBool: " + e.Message); }
+			try { Harmony.CreateAndPatchAll(typeof(LedgerBlockAxis)); } catch (Exception e) { Logger.LogWarning("LedgerBlockAxis: " + e.Message); }
 			Logger.LogInfo("Scam Artist loaded.");
 		}
 

@@ -117,7 +117,7 @@ namespace ScavengeTimerMod
 		internal static float Xp
 		{
 			get { return ScavengerPlugin.Stash != null ? ScavengerPlugin.Stash.skillXp : 0f; }
-			set { if (ScavengerPlugin.Stash != null) ScavengerPlugin.Stash.skillXp = Mathf.Max(0f, value); }
+			set { if (ScavengerPlugin.Stash != null) { ScavengerPlugin.Stash.skillXp = Mathf.Max(0f, value); ScavengerPlugin.Stash.Backup(false); } }
 		}
 
 		internal const int MaxLevel = 10;          // same as the game's skills
@@ -331,6 +331,33 @@ namespace ScavengeTimerMod
 			AddXp(XpPerTrashContainer.Value * diff * drunk, string.Join(", ", notes.ToArray()));
 		}
 
+		// Storage.AddItemAndReturnRemaining exists in the playtest build but not in the stable one: look it up once,
+		// and without it the extra finds are simply skipped (nothing is added, so the caller counts them as not found).
+		private static System.Reflection.MethodInfo addItem;
+		private static bool addItemLooked, addItemWarned;
+		private static int AddItem(Storage storage, Item item, int amount)
+		{
+			try
+			{
+				if (!addItemLooked)
+				{
+					addItemLooked = true;
+					addItem = typeof(Storage).GetMethod("AddItemAndReturnRemaining", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+				}
+				if (addItem != null)
+				{
+					var ps = addItem.GetParameters();
+					var args = new object[ps.Length];
+					args[0] = item; if (ps.Length > 1) args[1] = amount;
+					for (int i = 2; i < ps.Length; i++) args[i] = ps[i].ParameterType.IsValueType ? (i == 2 ? (object)(-1) : Activator.CreateInstance(ps[i].ParameterType)) : null;
+					return Convert.ToInt32(addItem.Invoke(storage, args));
+				}
+				if (!addItemWarned) { addItemWarned = true; SkillsPackMod.SkillBackup.Log("Scavenger: this game version has no Storage.AddItemAndReturnRemaining, the extra finds are skipped."); }
+			}
+			catch (Exception) { }
+			return amount;
+		}
+
 		// Level 10 perk: a guaranteed rare-pool find on top of instinct.
 		private static void TrashKingFind(Storage storage)
 		{
@@ -339,7 +366,7 @@ namespace ScavengeTimerMod
 			if (cat == null || (cat.ItemRare.Count == 0 && cat.ItemCommon.Count == 0)) return;
 			Item item = cat.GetRandomItem(cat.ItemRare.Count > 0 ? 1f : 0f);
 			if (item == null) return;
-			if (storage.AddItemAndReturnRemaining(item, 1, -1, null) >= 1) return;
+			if (AddItem(storage, item, 1) >= 1) return;
 			try
 			{
 				if (Inventory.instance != null && Inventory.instance.storagePanelUI != null)
@@ -365,7 +392,7 @@ namespace ScavengeTimerMod
 				if (UnityEngine.Random.value < MultiChance)
 					amount = UnityEngine.Random.Range(2, MaxAmountPerFind + 1);
 				amount = Mathf.Min(amount, Mathf.Max(1, item.Stackable));
-				int added = amount - storage.AddItemAndReturnRemaining(item, amount, -1, null);
+				int added = amount - AddItem(storage, item, amount);
 				if (added > 0) names.Add(added > 1 ? item.Title + " x" + added : item.Title);
 			}
 			if (names.Count == 0) return;

@@ -24,8 +24,8 @@ namespace ScavengeTimerMod
 			SceneManager.sceneLoaded += OnSceneLoaded;
 			EnsureSaveObject();
 
-			Harmony.CreateAndPatchAll(typeof(SaveHooks));
-			Harmony.CreateAndPatchAll(typeof(ScavengingSkill.Hooks));
+			SkillsPackMod.SafePatch.All(typeof(SaveHooks), "JuanBerta.Obenseuer.Scavenger", Logger);
+			SkillsPackMod.SafePatch.All(typeof(ScavengingSkill.Hooks), "JuanBerta.Obenseuer.Scavenger", Logger);
 			TimeOfDayAzure.DayChanged += OnDayChanged;
 			SaveController.LoadingDone += OnGameLoaded;
 			Logger.LogInfo("Scavenger loaded.");
@@ -96,6 +96,16 @@ namespace ScavengeTimerMod
 				return;
 			}
 			// Playing without having loaded anything (a new game) while the previous game's data is in memory.
+			// The save object was just created empty (a reload destroyed it) and there is a backup for this character: restore it.
+			float backed = SkillsPackMod.SkillBackup.Get(current, save.BackupId);
+			if (string.IsNullOrEmpty(save.ownerCharacter) && backed > 0f)
+			{
+				save.ResetSkill(current);
+				save.skillXp = backed;
+				save.dayKey = CurrentDayKey();
+				if (instance != null) instance.Logger.LogInfo("Scavenger: restored " + Mathf.FloorToInt(backed) + " XP for '" + current + "' from the backup.");
+				return;
+			}
 			save.ResetSkill(current);
 			save.dayKey = CurrentDayKey();
 			if (instance != null) instance.Logger.LogInfo("New character '" + current + "': Scavenging starts at 0.");

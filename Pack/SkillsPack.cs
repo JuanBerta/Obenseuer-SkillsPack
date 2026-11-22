@@ -11,8 +11,8 @@ using UnityEngine;
 [assembly: AssemblyDescription("Skills Pack for Obenseuer: Scavenger, Haggling, Bribery+, Stealth, Scam Artist and Lockpick Learning and XP Tiers in one mod.")]
 [assembly: AssemblyCompany("JuanBerta")]
 [assembly: AssemblyProduct("Obenseuer Skills Pack")]
-[assembly: AssemblyVersion("1.2.0.0")]
-[assembly: AssemblyFileVersion("1.2.0.0")]
+[assembly: AssemblyVersion("1.2.1.0")]
+[assembly: AssemblyFileVersion("1.2.1.0")]
 
 namespace SkillsPackMod
 {
@@ -23,7 +23,7 @@ namespace SkillsPackMod
 	/// </summary>
 	internal static class SkillsPack
 	{
-		public const string Version = "1.2.0";
+		public const string Version = "1.2.1";
 
 		private static ConfigFile cfg;
 		private static ManualLogSource log;
