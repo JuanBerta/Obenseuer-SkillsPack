@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.3
+- Bribery+: success odds rise faster with level (ExtraSuccessPerLevel 3%/level on top of the game's 3%, about 90% for a stranger at level 10, never above 95%) and rewards grow faster toward level 10 (RewardPerLevelSquared: 13.1x the level-1 reward at level 10 instead of 4.6x)
+
 ## 1.2.2
 - Bribery+: if the game does not report the person you are looking at, the mod now looks straight ahead from the camera to find them, and when the ask key finds nobody it writes the reason to the log ("the cursor is free", "too far", "nobody in front of you"...), so a key that does nothing can be diagnosed.
 

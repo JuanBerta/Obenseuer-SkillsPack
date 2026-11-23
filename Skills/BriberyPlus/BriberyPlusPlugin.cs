@@ -67,6 +67,9 @@ namespace BriberyPlusMod
 		internal static ConfigEntry<float> MaxReward;
 		internal static ConfigEntry<float> RewardPerLevel;
 		internal static ConfigEntry<float> PoliceRewardFactor;
+		internal static ConfigEntry<float> RewardPerLevelSquared;
+		internal static ConfigEntry<float> ExtraSuccessPerLevel;
+		internal static ConfigEntry<float> MinFailChance;
 		internal static ConfigEntry<float> RmChancePerLevel;
 		internal static ConfigEntry<float> RmBonus;
 		internal static ConfigEntry<float> XpFactor;
@@ -104,6 +107,9 @@ namespace BriberyPlusMod
 			MinReward = cfg.Bind("Rewards", "MinReward", 3f, D("Smallest reward in OC at level 1.", 100, new AcceptableValueRange<float>(0f, 1000f)));
 			MaxReward = cfg.Bind("Rewards", "MaxReward", 12f, D("Biggest reward in OC at level 1.", 95, new AcceptableValueRange<float>(0f, 1000f)));
 			RewardPerLevel = cfg.Bind("Rewards", "RewardPerLevel", 0.4f, D("Rewards grow by this much per Bribery level above 1 (0.4 = level 10 gives 4.6 times as much).", 90, new AcceptableValueRange<float>(0f, 3f)));
+			RewardPerLevelSquared = cfg.Bind("Rewards", "RewardPerLevelSquared", 0.1f, D("Extra reward growth that speeds up with level: adds this x (level-1)^2 to the reward multiplier, so the top levels pay much more (the game's skills go to level 10: 0.1 gives 13.1x at level 10 instead of 4.6x).", 92, new AcceptableValueRange<float>(0f, 1f)));
+			ExtraSuccessPerLevel = cfg.Bind("Odds", "ExtraSuccessPerLevel", 0.03f, D("On top of the game's 3% per Bribery level, each level above 1 lowers the chance of a no by this much (0.03 = 3% more success per level, about 90% success at level 10 for a stranger).", 98, new AcceptableValueRange<float>(0f, 0.1f)));
+			MinFailChance = cfg.Bind("Odds", "MinFailChance", 0.05f, D("A no can never be less likely than this, however high your level (0.05 = at most 95% success).", 96, new AcceptableValueRange<float>(0f, 1f)));
 			PoliceRewardFactor = cfg.Bind("Rewards", "PoliceRewardFactor", 2f, D("Reward multiplier when police pay up.", 85, new AcceptableValueRange<float>(0f, 10f)));
 			RmChancePerLevel = cfg.Bind("Rewards", "RmChancePerLevel", 0.04f, D("Chance per Bribery level that you're paid in RM instead of OC (0.04 = 40% at level 10).", 80, new AcceptableValueRange<float>(0f, 0.1f)));
 			RmBonus = cfg.Bind("Rewards", "RmBonus", 1.25f, D("RM rewards are worth this much more than the same OC reward.", 75, new AcceptableValueRange<float>(0.1f, 5f)));
@@ -215,7 +221,9 @@ namespace BriberyPlusMod
 
 		private static float FailChance(Target t)
 		{
-			return Recipe.CurrentFailChance(RawFail(t), PlayerStats.PlayerSkillType.Bribery);
+			float fail = Recipe.CurrentFailChance(RawFail(t), PlayerStats.PlayerSkillType.Bribery);
+			fail -= ExtraSuccessPerLevel.Value * (Mathf.Min(BriberyLevel, 10) - 1);
+			return Mathf.Clamp(fail, Mathf.Min(MinFailChance.Value, 0.99f), 0.99f);
 		}
 
 		private static int BriberyLevel
@@ -307,12 +315,12 @@ namespace BriberyPlusMod
 
 		private static void Pay(Target t, float fail)
 		{
-			int level = BriberyLevel;
+			int level = Mathf.Min(BriberyLevel, 10);
 			float quality = 1f;
 			try { quality = Mathf.Lerp(0.7f, 1.3f, Mathf.Clamp01(PlayerStats.SkillQuality(PlayerStats.PlayerSkillType.Bribery, fail) / 2f)); }
 			catch (Exception) { }
 			float oc = UnityEngine.Random.Range(MinReward.Value, Mathf.Max(MinReward.Value, MaxReward.Value));
-			oc *= 1f + RewardPerLevel.Value * (level - 1);
+			oc *= 1f + RewardPerLevel.Value * (level - 1) + RewardPerLevelSquared.Value * (level - 1) * (level - 1);
 			oc *= Mathf.Lerp(0.6f, 1.4f, Generosity(t.id)) * quality;
 			if (t.police) oc *= PoliceRewardFactor.Value;
 			oc = Mathf.Max(1f, Mathf.Round(oc));
