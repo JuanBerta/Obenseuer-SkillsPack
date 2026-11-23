@@ -5,9 +5,11 @@ Skills Pack
 Seven skill mods in one: Scavenging, Haggling, Bribery+, Stealth, Fraud (Scam Artist), Lockpick Learning and XP Tiers. Real skills on the Character tab with XP, levels and level 10 perks. Replaces the separate mods; saves and settings carry over.
 
 === FILE DESCRIPTION ===
-Obenseuer-SkillsPack-v1.2.1.rar : Skills Pack 1.2.1 for BepInEx 6. Extract into the Obenseuer folder. Delete the old separate skill mods first.
+Obenseuer-SkillsPack-v1.2.2.rar : Skills Pack 1.2.2 for BepInEx 6. Extract into the Obenseuer folder. Delete the old separate skill mods first.
 
 === CHANGELOG ===
+1.2.2
+- Bribery+: if the game does not report the person you are looking at, the mod now looks straight ahead from the camera to find them. When the ask key finds nobody, the reason is written to the log (the cursor is free, too far, nobody in front of you...), so a key that does nothing can be diagnosed.
 1.2.1
 - Fix: skill progress could be lost after a reload (a small load between the building and the street, a death, loading an older save). Every skill now keeps a second copy of its XP in memory and in BepInEx/config/JuanBerta.Obenseuer.SkillsPack.progress.txt; a load that brings back no data or less XP than that copy keeps the higher value. Progress only goes up (delete a line of that file to reset a character by hand).
 - Fix: on the stable game build (0.5.08) a game method that does not exist no longer stops the rest of a skill's patches: it is skipped with a warning in the log. Scavenger's extra finds are skipped there if the game lacks the method they need.

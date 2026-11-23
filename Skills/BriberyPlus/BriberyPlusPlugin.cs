@@ -129,16 +129,38 @@ namespace BriberyPlusMod
 			public string blocked;   // why you can't ask, or null
 		}
 
+		// Why Current() found nobody, for the log when the ask key does nothing.
+		private static string whyNot;
+		private static float nextWhyLog;
+
+		private static NPCInfo LookedAtNpc()
+		{
+			// The game's interaction target is empty in some builds; look straight ahead from the camera as well.
+			try
+			{
+				Camera cam = Camera.main;
+				if (cam == null) return null;
+				RaycastHit hit;
+				if (!Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, MaxDistance.Value + 1.5f, ~0, QueryTriggerInteraction.Ignore)) return null;
+				return hit.collider != null ? hit.collider.GetComponentInParent<NPCInfo>() : null;
+			}
+			catch (Exception) { return null; }
+		}
+
 		private static Target? Current()
 		{
-			if (!Enabled.Value || !SkillHost.InGame || PlayerStats.instance == null) return null;
-			if (Time.timeScale <= 0f || Cursor.lockState != CursorLockMode.Locked) return null;
-			if (TradePanel.instance != null && TradePanel.instance.activeTrade != null) return null;
+			whyNot = null;
+			if (!Enabled.Value) { whyNot = "Bribery+ is off"; return null; }
+			if (!SkillHost.InGame || PlayerStats.instance == null) { whyNot = "not in a game"; return null; }
+			if (Time.timeScale <= 0f) { whyNot = "the game is paused"; return null; }
+			if (Cursor.lockState != CursorLockMode.Locked) { whyNot = "the cursor is free (" + Cursor.lockState + "), a menu or another mod may be holding it"; return null; }
+			if (TradePanel.instance != null && TradePanel.instance.activeTrade != null) { whyNot = "a trade is open"; return null; }
 			GameObject go = InteractObjects.instance != null ? InteractObjects.instance.currentGameObject : null;
-			if (go == null) return null;
-			NPCInfo npc = go.GetComponentInParent<NPCInfo>();
-			if (npc == null || npc.character == null || !npc.isActiveAndEnabled) return null;
-			if (PlayerLocator.instance != null && Vector3.Distance(PlayerLocator.instance.transform.position, npc.transform.position) > MaxDistance.Value) return null;
+			NPCInfo npc = go != null ? go.GetComponentInParent<NPCInfo>() : null;
+			if (npc == null) npc = LookedAtNpc();
+			if (npc == null) { whyNot = go == null ? "nobody in front of you (interaction target: none)" : "the thing you look at is not a person (" + go.name + ")"; return null; }
+			if (npc.character == null || !npc.isActiveAndEnabled) { whyNot = "that person has no character data"; return null; }
+			if (PlayerLocator.instance != null && Vector3.Distance(PlayerLocator.instance.transform.position, npc.transform.position) > MaxDistance.Value) { whyNot = "too far (" + Mathf.Round(Vector3.Distance(PlayerLocator.instance.transform.position, npc.transform.position) * 10f) / 10f + " m, max " + MaxDistance.Value + ")"; return null; }
 			var t = new Target { npc = npc, id = npc.character.ID, name = NameOf(npc.character), police = IsPolice(npc.character) };
 			try { if (npc.Sleeping()) t.blocked = "asleep"; } catch (Exception) { }
 			if (t.blocked == null && Save != null)
@@ -214,7 +236,12 @@ namespace BriberyPlusMod
 			{
 				if (!AskKey.Value.IsDown()) return;
 				Target? t = Current();
-				if (t == null) return;
+				if (t == null)
+				{
+					// Say why, so a key that "does nothing" can be explained from the log.
+					if (Time.unscaledTime >= nextWhyLog) { nextWhyLog = Time.unscaledTime + 2f; Logger.LogInfo("Bribery+: ask key pressed, no target: " + whyNot + "."); }
+					return;
+				}
 				Ask(t.Value);
 			}
 			catch (Exception e) { Logger.LogWarning("Bribery+: " + e.Message); }

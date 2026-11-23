@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.2
+- Bribery+: if the game does not report the person you are looking at, the mod now looks straight ahead from the camera to find them, and when the ask key finds nobody it writes the reason to the log ("the cursor is free", "too far", "nobody in front of you"...), so a key that does nothing can be diagnosed.
+
 ## 1.2.1
 - Fix: skill progress could be lost after a reload (a small load between the building and the street, a death, a load of an older save). Every custom skill (Scavenger, Haggling, Bribery+, Stealth, Scam Artist) now keeps a second copy of its XP in memory and in BepInEx/config/JuanBerta.Obenseuer.SkillsPack.progress.txt, and a load that brings back no data or less XP than that copy keeps the higher value. Progress only goes up; delete a line of that file to reset a character by hand.
 - Fix: on the stable game build (0.5.08) a missing game method no longer stops the rest of a skill's patches: the one that does not exist is skipped with a warning in the log. Scavenger's extra finds are skipped there if the game has no Storage.AddItemAndReturnRemaining.
