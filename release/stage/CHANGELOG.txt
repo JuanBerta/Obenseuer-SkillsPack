@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## 1.3.2
+- Woodcutting now levels up by XP like the game's own skills: 1000 XP per level (XpPerLevel), 10 XP for each axe hit (XpPerHit) and 40 XP each time a tree or log gives wood (XpPerWood). The Character tab shows your total XP, and the row appears from your first chop, with a message.
+- Woodcutting: drinking makes some hits clumsy misses (DrunkMissChance) that do little but give 3x XP (DrunkMissXpFactor), and weaken your chopping and bonus wood (DrunkOutputLoss). Mushrooms raise your effective Woodcutting level while you are high (MushroomsBoostSkill).
+- Old Woodcutting settings XpPerLevelStep and XpPerChop are replaced; your Woodcutting level and XP from 1.3.1 carry over (the XP now counts toward the 1000 XP levels).
+- Made with AI assistance (Claude).
+
 ## 1.3.1
 - Woodcutting now shows in the Character tab, with its level and progress to the next level, like the game's own skills. The Home key and its ShowSkillKey setting are gone.
 - Made with AI assistance (Claude).

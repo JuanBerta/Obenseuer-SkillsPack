@@ -10,7 +10,7 @@ Skill mods for Obenseuer in one BepInEx 6 mod. It replaces the separate Scavenge
 | **Lockpick Learning** | The game's own Lockpicking skill grows faster from failed attempts (FailureShare) and when drunk or high (ImpairedBonus). |
 | **Stealth** | XP for stealing, lockpicking and trespassing unseen; people and cameras notice you less. Level 10: Shadow. |
 | **Fraud** (Scam Artist) | Scam invoices that play out over days, with odds on the invoice, a scam ledger (F7), follow-ups, investigations, and frozen accounts that unfreeze on their own after 7 days. |
-| **Woodcutting** | Chop trees and logs with an axe to level up (10 by default, a setting): faster, harder swings and extra wood per tree. Each save slot has its own level, shown in the Character tab. |
+| **Woodcutting** | Chop trees and logs with an axe to level up (10 by default, a setting): faster, harder swings and extra wood per tree. Levels by XP (1000 per level, like the game's skills); drinking makes some hits clumsy misses that give more XP, mushrooms boost your level. Each save slot has its own level, shown in the Character tab. |
 | **XP Tiers** | Recipe skill XP scales with how valuable the result is (4 tiers, planting included); mining, jobs, sauna, drinking and furniture blueprints give several times more XP. Every number is a setting. |
 
 ## Coming from the separate mods

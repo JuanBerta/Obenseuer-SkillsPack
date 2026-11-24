@@ -5,9 +5,14 @@ Skills Pack
 Eight skill mods in one: Scavenging, Haggling, Bribery+, Stealth, Fraud (Scam Artist), Lockpick Learning, Woodcutting and XP Tiers. Made with AI assistance. Real skills on the Character tab with XP, levels and level 10 perks. Replaces the separate mods; saves and settings carry over.
 
 === FILE DESCRIPTION ===
-Obenseuer-SkillsPack-v1.3.1.rar : Skills Pack 1.3.1 for BepInEx 6. Extract into the Obenseuer folder. Delete the old separate skill mods first.
+Obenseuer-SkillsPack-v1.3.2.rar : Skills Pack 1.3.2 for BepInEx 6. Extract into the Obenseuer folder. Delete the old separate skill mods first.
 
 === CHANGELOG ===
+1.3.2
+- Woodcutting now levels up by XP like the game's own skills: 1000 XP per level (XpPerLevel), 10 XP for each axe hit (XpPerHit) and 40 XP each time a tree or log gives wood (XpPerWood). The Character tab shows your total XP, and the row appears from your first chop, with a message.
+- Woodcutting: drinking makes some hits clumsy misses (DrunkMissChance) that do little but give 3x XP (DrunkMissXpFactor), and weaken your chopping and bonus wood (DrunkOutputLoss). Mushrooms raise your effective Woodcutting level while you are high (MushroomsBoostSkill).
+- Old Woodcutting settings XpPerLevelStep and XpPerChop are replaced; your Woodcutting level and XP from 1.3.1 carry over (the XP now counts toward the 1000 XP levels).
+- Made with AI assistance (Claude).
 1.3.1
 - Woodcutting now shows in the Character tab (level and progress to the next level), like the game's own skills. The Home key is gone.
 - Made with AI assistance (Claude).
