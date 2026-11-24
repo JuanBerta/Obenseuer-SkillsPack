@@ -99,8 +99,8 @@ namespace SkillsPackMod
 					sb.Append(kv.Key).Append('\t').Append(kv.Value.ToString("0.###", CultureInfo.InvariantCulture)).Append('\n');
 				string tmp = FilePath + ".tmp";
 				File.WriteAllText(tmp, sb.ToString());
-				if (File.Exists(FilePath)) File.Delete(FilePath);
-				File.Move(tmp, FilePath);
+				if (File.Exists(FilePath)) File.Replace(tmp, FilePath, null);   // never leaves a moment without a file
+				else File.Move(tmp, FilePath);
 				dirty = false;
 				lastFlush = Time.realtimeSinceStartup;
 			}

@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## 1.3.3
+- Fix: lowering Woodcutting's MaxLevel no longer cuts your stored level. MaxLevel now only caps the effects; the stored level is kept.
+- Fix: Woodcutting progress now also has the never-decreasing backup the other skills have (JuanBerta.Obenseuer.SkillsPack.progress.txt), so a missing, older or reset woodcutting.json cannot lose it.
+- Fix: the progress backup file is replaced in one step, so it cannot be left missing if the game closes while it is written.
+- Made with AI assistance (Claude).
+
 ## 1.3.2
 - Woodcutting now levels up by XP like the game's own skills: 1000 XP per level (XpPerLevel), 10 XP for each axe hit (XpPerHit) and 40 XP each time a tree or log gives wood (XpPerWood). The Character tab shows your total XP, and the row appears from your first chop, with a message.
 - Woodcutting: drinking makes some hits clumsy misses (DrunkMissChance) that do little but give 3x XP (DrunkMissXpFactor), and weaken your chopping and bonus wood (DrunkOutputLoss). Mushrooms raise your effective Woodcutting level while you are high (MushroomsBoostSkill).

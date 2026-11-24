@@ -26,7 +26,7 @@ namespace WoodcuttingMod
         static string slotKey;
         static float nextCheck;
         static int unsaved;
-        internal static int Level { get { EnsureSlot(); return lvl; } private set { lvl = value; } }
+        internal static int Level { get { EnsureSlot(); return Mathf.Min(lvl, MaxLevel); } private set { lvl = value; } }   // a lower MaxLevel only caps the effects: the stored level is never cut
         internal static float Xp { get { return xpv; } private set { xpv = value; } }
 
         void Awake()
@@ -157,12 +157,22 @@ namespace WoodcuttingMod
             try
             {
                 string f = Path.Combine(SlotDir(key), "woodcutting.json");
-                if (!File.Exists(f)) return;
+                float back = SkillsPackMod.SkillBackup.Get(key, "Woodcutting");   // levels + share of the next one, kept outside the save folder too
+                if (!File.Exists(f)) { RestoreFromBackup(back); return; }
                 var j = JObject.Parse(File.ReadAllText(f));
-                lvl = Mathf.Clamp((int)j["level"], 0, MaxLevel);
+                lvl = Mathf.Clamp((int)j["level"], 0, 50);
                 xpv = Mathf.Max(0f, (float)j["xp"]);
+                if (back > lvl + xpv / NeededForNext + 0.0001f) RestoreFromBackup(back);   // the file was older or reset
             }
             catch (Exception e) { if (I != null) I.Warn("Could not read the saved skill: " + e.Message); }
+        }
+
+        static void RestoreFromBackup(float back)
+        {
+            if (back <= 0f) return;
+            lvl = Mathf.Clamp(Mathf.FloorToInt(back), 0, 50);
+            xpv = Mathf.Max(0f, (back - lvl) * NeededForNext);
+            if (I != null) I.Info("Woodcutting: restored level " + lvl + " from the backup.");
         }
 
         internal static void Save()
@@ -171,6 +181,7 @@ namespace WoodcuttingMod
             {
                 unsaved = 0;
                 if (slotKey == null) return;
+                if (lvl > 0 || xpv > 0f) SkillsPackMod.SkillBackup.Put(slotKey, "Woodcutting", lvl + xpv / NeededForNext + 0.0001f, false);
                 string dir = SlotDir(slotKey);
                 // A brand new character has no folder until the game saves for the first time; try again later.
                 if (!Directory.Exists(dir)) { unsaved = 15; return; }
