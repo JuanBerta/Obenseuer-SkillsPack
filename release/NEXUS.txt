@@ -1,13 +1,16 @@
-=== NAME ===
+﻿=== NAME ===
 Skills Pack
 
 === SHORT DESCRIPTION (summary) ===
-Seven skill mods in one: Scavenging, Haggling, Bribery+, Stealth, Fraud (Scam Artist), Lockpick Learning and XP Tiers. Real skills on the Character tab with XP, levels and level 10 perks. Replaces the separate mods; saves and settings carry over.
+Eight skill mods in one: Scavenging, Haggling, Bribery+, Stealth, Fraud (Scam Artist), Lockpick Learning, Woodcutting and XP Tiers. Made with AI assistance. Real skills on the Character tab with XP, levels and level 10 perks. Replaces the separate mods; saves and settings carry over.
 
 === FILE DESCRIPTION ===
-Obenseuer-SkillsPack-v1.2.2.rar : Skills Pack 1.2.2 for BepInEx 6. Extract into the Obenseuer folder. Delete the old separate skill mods first.
+Obenseuer-SkillsPack-v1.3.0.rar : Skills Pack 1.3.0 for BepInEx 6. Extract into the Obenseuer folder. Delete the old separate skill mods first.
 
 === CHANGELOG ===
+1.3.0
+- New: Woodcutting skill (moved in from the separate Woodcutting mod). Chopping trees and logs with an axe levels it up to 10 by default (MaxLevel is a setting): the axe hits harder and swings faster, and each tree or log gives extra wood. Each save slot keeps its own level (Saves/<character>/woodcutting.json); press Home to see it. Own on/off switch, and a warning in the log if the separate Woodcutting.dll is still installed.
+- Made with AI assistance (Claude).
 1.2.3
 - Bribery+: success odds rise faster with level (ExtraSuccessPerLevel 3%/level on top of the game's 3%, about 90% for a stranger at level 10, never above 95%) and rewards grow faster toward level 10 (RewardPerLevelSquared: 13.1x the level-1 reward at level 10 instead of 4.6x)
 1.2.2
@@ -25,10 +28,12 @@ Obenseuer-SkillsPack-v1.2.2.rar : Skills Pack 1.2.2 for BepInEx 6. Extract into 
 - On/off switch per skill.
 
 === FULL DESCRIPTION (BBCode) ===
+[b]MADE WITH AI:[/b] this mod was written with the assistance of AI (Claude by Anthropic) under my direction. The source code is public.
+
 [size=5][b]Skills Pack[/b][/size]
 [i]Skill mods for Obenseuer in one download.[/i]
 
-This pack replaces my separate mods [b]Scavenger[/b], [b]Haggling[/b], [b]Bribery+[/b], [b]Stealth[/b] and [b]Scam Artist[/b]. Every skill shows on the Character tab like the game's own skills, starts unlearned, and uses the game's "New skill learned" and level-up popups.
+This pack replaces my separate mods [b]Woodcutting[/b], [b]Scavenger[/b], [b]Haggling[/b], [b]Bribery+[/b], [b]Stealth[/b] and [b]Scam Artist[/b]. Every skill shows on the Character tab like the game's own skills, starts unlearned, and uses the game's "New skill learned" and level-up popups.
 
 [size=4][b]The skills[/b][/size]
 [list]
@@ -37,13 +42,14 @@ This pack replaces my separate mods [b]Scavenger[/b], [b]Haggling[/b], [b]Briber
 [*][b]Bribery+[/b]: look at a person and press [b]B[/b] to ask for money, using the game's Bribery skill. People differ, police pay more but are harder, and failing can offend them or get you reported.
 [*][b]Lockpick Learning[/b]: the game's own Lockpicking skill grows faster from failed attempts (0.8 of a success instead of 0.2) and when you are drunk or high (up to double). Both amounts are settings. [b]Added in 1.1.0.[/b]
 [*][b]XP Tiers[/b]: recipes give more skill XP the more valuable their result is: the cheapest recipes of a skill stay at normal XP, the top ones give up to 4x (planting too). Mining, jobs, sauna, drinking and furniture blueprints give several times more XP, so they are worth levelling with. Every multiplier, the tier cutoffs and per-recipe overrides are settings. [b]New in 1.2.0.[/b]
+[*][b]Woodcutting[/b]: chop trees and logs with an axe to level up (level 10 by default, a setting). Your axe hits harder and swings faster, and every tree or log gives extra wood. Each save slot has its own level; press [b]Home[/b] to see it. [b]New in 1.3.0.[/b]
 [*][b]Stealth[/b]: XP for stealing, lockpicking and trespassing unseen. People and cameras notice you less (up to 50%), more so when crouching or in the dark. [i]Level 10, Shadow:[/i] crimes you're caught for count as less serious.
 [*][b]Fraud (Scam Artist)[/b]: scam invoices play out over days. See your odds and payout on each invoice, read the companies' replies in the scam ledger ([b]F7[/b]), send follow-ups, and bribe, settle or lay low when reported. [b]New:[/b] a frozen bank account unfreezes on its own after 7 in-game days.
 [/list]
 
 [size=4][b]Coming from the separate mods[/b][/size]
 [list]
-[*][b]Delete the old DLLs[/b] from BepInEx/plugins (Obenseuer-Scavenger, -Haggling, -BriberyPlus, -Stealth, -ScamArtist). The pack warns in the log if one is still there.
+[*][b]Delete the old DLLs[/b] from BepInEx/plugins (Obenseuer-Scavenger, -Haggling, -BriberyPlus, -Stealth, -ScamArtist, and Woodcutting.dll). The pack warns in the log if one is still there.
 [*][b]Your saves carry over:[/b] skill levels, XP and the scam ledger.
 [*][b]Your settings carry over:[/b] each skill keeps its own config file.
 [/list]

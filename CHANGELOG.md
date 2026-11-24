@@ -1,4 +1,8 @@
-# Changelog
+﻿# Changelog
+
+## 1.3.0
+- New: Woodcutting skill (moved in from the separate Woodcutting mod). Chopping trees and logs with an axe levels it up to 10 by default (MaxLevel is a setting): the axe hits harder and swings faster, and each tree or log gives extra wood. Each save slot keeps its own level (Saves/<character>/woodcutting.json); press Home to see it. Own on/off switch, and a warning in the log if the separate Woodcutting.dll is still installed.
+- Made with AI assistance (Claude).
 
 ## 1.2.3
 - Bribery+: success odds rise faster with level (ExtraSuccessPerLevel 3%/level on top of the game's 3%, about 90% for a stranger at level 10, never above 95%) and rewards grow faster toward level 10 (RewardPerLevelSquared: 13.1x the level-1 reward at level 10 instead of 4.6x)

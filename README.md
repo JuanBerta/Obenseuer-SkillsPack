@@ -1,6 +1,6 @@
-# Obenseuer Skills Pack
+﻿# Obenseuer Skills Pack
 
-Skill mods for Obenseuer in one BepInEx 6 mod. It replaces the separate Scavenger, Haggling, Bribery+, Stealth and Scam Artist mods.
+Skill mods for Obenseuer in one BepInEx 6 mod. It replaces the separate Scavenger, Haggling, Bribery+, Stealth and Scam Artist mods, and includes Woodcutting.
 
 | Skill | What it adds |
 |---|---|
@@ -10,11 +10,12 @@ Skill mods for Obenseuer in one BepInEx 6 mod. It replaces the separate Scavenge
 | **Lockpick Learning** | The game's own Lockpicking skill grows faster from failed attempts (FailureShare) and when drunk or high (ImpairedBonus). |
 | **Stealth** | XP for stealing, lockpicking and trespassing unseen; people and cameras notice you less. Level 10: Shadow. |
 | **Fraud** (Scam Artist) | Scam invoices that play out over days, with odds on the invoice, a scam ledger (F7), follow-ups, investigations, and frozen accounts that unfreeze on their own after 7 days. |
+| **Woodcutting** | Chop trees and logs with an axe to level up (10 by default, a setting): faster, harder swings and extra wood per tree. Each save slot has its own level; Home shows it. |
 | **XP Tiers** | Recipe skill XP scales with how valuable the result is (4 tiers, planting included); mining, jobs, sauna, drinking and furniture blueprints give several times more XP. Every number is a setting. |
 
 ## Coming from the separate mods
 
-- **Delete the old DLLs** (`Obenseuer-Scavenger`, `-Haggling`, `-BriberyPlus`, `-Stealth`, `-ScamArtist` in `BepInEx\plugins`). The pack warns in the log if one is still there.
+- **Delete the old DLLs** (`Obenseuer-Scavenger`, `-Haggling`, `-BriberyPlus`, `-Stealth`, `-ScamArtist` in `BepInEx\plugins`, and `Woodcutting.dll` if you installed that mod). The pack warns in the log if one is still there.
 - **Saves carry over.** Skill levels, XP and the scam ledger are kept.
 - **Settings carry over.** Each skill keeps its own config file (`JuanBerta.Obenseuer.<Skill>.cfg`).
 
@@ -29,6 +30,10 @@ Extract into the Obenseuer folder (BepInEx 6 be.697 or newer). The DLL goes to `
 ## Works with
 
 Loot Map (searched-trash markers) and Special Orders (Haggling bonus) find the skills inside the pack.
+
+## Made with AI
+
+This pack was written with the assistance of AI (Claude by Anthropic) under my direction.
 
 ## Build
 

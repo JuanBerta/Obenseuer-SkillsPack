@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -8,11 +8,11 @@ using BepInEx.Logging;
 using UnityEngine;
 
 [assembly: AssemblyTitle("Obenseuer-SkillsPack")]
-[assembly: AssemblyDescription("Skills Pack for Obenseuer: Scavenger, Haggling, Bribery+, Stealth, Scam Artist and Lockpick Learning and XP Tiers in one mod.")]
+[assembly: AssemblyDescription("Skills Pack for Obenseuer: Scavenger, Haggling, Bribery+, Stealth, Scam Artist and Lockpick Learning, Woodcutting and XP Tiers in one mod.")]
 [assembly: AssemblyCompany("JuanBerta")]
 [assembly: AssemblyProduct("Obenseuer Skills Pack")]
-[assembly: AssemblyVersion("1.2.2.0")]
-[assembly: AssemblyFileVersion("1.2.2.0")]
+[assembly: AssemblyVersion("1.3.0.0")]
+[assembly: AssemblyFileVersion("1.3.0.0")]
 
 namespace SkillsPackMod
 {
@@ -23,7 +23,7 @@ namespace SkillsPackMod
 	/// </summary>
 	internal static class SkillsPack
 	{
-		public const string Version = "1.2.3";
+		public const string Version = "1.3.0";
 
 		private static ConfigFile cfg;
 		private static ManualLogSource log;
@@ -37,6 +37,7 @@ namespace SkillsPackMod
 			new[] { "Stealth", "Stealth: sneak, steal and stay unseen more easily as you level up." },
 			new[] { "ScamArtist", "Scam Artist: the Fraud skill and scam invoices that play out over days." },
 			new[] { "LockpickLearning", "Lockpick Learning: the Lockpicking skill grows faster from failed attempts and when drunk or high." },
+			new[] { "Woodcutting", "Woodcutting: a skill that makes your axe chop faster and your trees give more wood." },
 			new[] { "XPTiers", "XP Tiers: recipes give more skill XP the rarer their result is, and mining, jobs, sauna, drinking and building give much more XP." },
 		};
 
@@ -77,6 +78,8 @@ namespace SkillsPackMod
 		{
 			try
 			{
+				foreach (string f in Directory.GetFiles(Paths.PluginPath, "Woodcutting.dll", SearchOption.AllDirectories))
+					log.LogWarning("The separate Woodcutting mod is still installed (" + f + "). Skills Pack already includes it: delete that file, or only one copy will load.");
 				string self = Path.GetFullPath(typeof(SkillsPack).Assembly.Location);
 				foreach (string[] s in Skills)
 					foreach (string f in Directory.GetFiles(Paths.PluginPath, "Obenseuer-" + s[0] + ".dll", SearchOption.AllDirectories))
