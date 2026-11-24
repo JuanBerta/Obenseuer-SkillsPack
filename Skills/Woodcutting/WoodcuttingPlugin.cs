@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Unity.Mono;
@@ -17,7 +18,6 @@ namespace WoodcuttingMod
         internal static ConfigEntry<int> cfgMaxLevel;
         internal static ConfigEntry<float> cfgChopPower, cfgSwing, cfgYield, cfgXpBase, cfgXpPerHit;
         internal static ConfigEntry<bool> cfgNotify, cfgSpeed, cfgExtraWood;
-        internal static ConfigEntry<KeyCode> cfgKey;
 
         // The skill belongs to the character (save slot): it lives in Saves/<character>/woodcutting.json
         static int lvl;
@@ -41,7 +41,6 @@ namespace WoodcuttingMod
             cfgExtraWood = Config.Bind("More wood", "Enabled", true, "More wood each time a tree or log gives you wood.");
             cfgYield = Config.Bind("More wood", "ExtraWoodPerLevel", 0.2f, "Extra wood per yield per level (0.2 = +2 wood at level 10). The fraction is a chance: 0.5 at level 5 means a 50% chance of +1.");
             cfgNotify = Config.Bind("General", "ShowNotifications", true, "Show a message when you gain a level.");
-            cfgKey = Config.Bind("General", "ShowSkillKey", KeyCode.Home, "Press to see your Woodcutting level and progress.");
             SkillsPackMod.SafePatch.All(typeof(Patches), "com.juanberta.obenseuer.woodcutting", Logger);
             Logger.LogInfo("Woodcutting 1.1.0 loaded.");
         }
@@ -49,24 +48,11 @@ namespace WoodcuttingMod
         internal void Warn(string m) { Logger.LogWarning(m); }
         internal void Info(string m) { Logger.LogInfo(m); }
 
-        void Update()
-        {
-            if (cfgKey == null) return;
-            try { if (Input.GetKeyDown(cfgKey.Value)) ShowStatus(); } catch { }
-        }
-
         void OnDestroy() { Save(); }
         void OnApplicationQuit() { Save(); }
 
         internal static int MaxLevel { get { return Mathf.Clamp(cfgMaxLevel.Value, 1, 50); } }
         internal static float NeededForNext { get { return Mathf.Max(1f, cfgXpBase.Value * (Level + 1)); } }
-
-        internal static void ShowStatus()
-        {
-            if (Notifications.instance == null) return;
-            string txt = Level >= MaxLevel ? "Level " + Level + " (max)" : "Level " + Level + " · " + Mathf.FloorToInt(Xp) + "/" + Mathf.CeilToInt(NeededForNext) + " chops to next";
-            Notifications.instance.CreateNotification("Woodcutting", txt, true);
-        }
 
         internal static void GainXp()
         {
@@ -197,6 +183,43 @@ namespace WoodcuttingMod
                 if (extra > 0) amount += extra;
             }
             catch (Exception e) { WoodcuttingPlugin.I.Warn(e.Message); }
+        }
+
+        // Woodcutting as one more row in the Character tab, drawn with the game's own skill row.
+        static CharacterPanelSkill woodRow;
+
+        static void SetText(object comp, string field, string text)
+        {
+            var f = AccessTools.Field(comp.GetType(), field); if (f == null) return;
+            var tmp = f.GetValue(comp); if (tmp == null) return;
+            var p = tmp.GetType().GetProperty("text"); if (p != null) p.SetValue(tmp, text, null);
+        }
+
+        [HarmonyPatch(typeof(CharacterPanel), "UpdateSkills")]
+        [HarmonyPostfix]
+        static void PanelPost(CharacterPanel __instance)
+        {
+            try
+            {
+                var t = typeof(CharacterPanel);
+                var list = (Transform)AccessTools.Field(t, "skillList").GetValue(__instance);
+                var prefab = (Transform)AccessTools.Field(t, "skillPrefab").GetValue(__instance);
+                if (woodRow == null || woodRow.transform.parent != list)
+                    woodRow = UnityEngine.Object.Instantiate(prefab, list).GetComponent<CharacterPanelSkill>();
+                int lv = WoodcuttingPlugin.Level;
+                woodRow.gameObject.SetActive(lv >= 1);
+                if (lv < 1) return;
+                bool max = lv >= WoodcuttingPlugin.MaxLevel;
+                float frac = max ? 0f : Mathf.Clamp01(WoodcuttingPlugin.Xp / WoodcuttingPlugin.NeededForNext);
+                woodRow.UpdateSkill(new PlayerStats.PlayerSkill { Type = PlayerStats.PlayerSkillType.None, Skill = Mathf.Min(lv + frac, (float)PlayerStats.maxLevel) });
+                SetText(woodRow, "title", "Woodcutting");
+                SetText(woodRow, "level", "LVL " + lv);
+                SetText(woodRow, "xp", max ? "MAX" : Mathf.FloorToInt(WoodcuttingPlugin.Xp) + "/" + Mathf.CeilToInt(WoodcuttingPlugin.NeededForNext) + " chops");
+                var sp = AccessTools.Field(t, "skillPanel").GetValue(__instance) as GameObject; if (sp != null) sp.SetActive(true);
+                var et = AccessTools.Field(t, "emptyPanelText").GetValue(__instance);
+                if (et != null) { var p = et.GetType().GetProperty("text"); if (p != null) p.SetValue(et, "", null); }
+            }
+            catch (Exception e) { WoodcuttingPlugin.I.Warn("Character tab: " + e.Message); }
         }
 
         // Faster axe swings.

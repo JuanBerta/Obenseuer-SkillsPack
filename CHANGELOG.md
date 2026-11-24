@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 1.3.1
+- Woodcutting now shows in the Character tab, with its level and progress to the next level, like the game's own skills. The Home key and its ShowSkillKey setting are gone.
+- Made with AI assistance (Claude).
+
 ## 1.3.0
 - New: Woodcutting skill (moved in from the separate Woodcutting mod). Chopping trees and logs with an axe levels it up to 10 by default (MaxLevel is a setting): the axe hits harder and swings faster, and each tree or log gives extra wood. Each save slot keeps its own level (Saves/<character>/woodcutting.json); press Home to see it. Own on/off switch, and a warning in the log if the separate Woodcutting.dll is still installed.
 - Made with AI assistance (Claude).
