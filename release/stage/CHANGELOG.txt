@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 1.3.4
+- Fix: the Bribery+ ask key (B) and the Scam Artist ledger key did nothing on non-English keyboard layouts (for example Russian), because the old Unity key check follows the typed letter. Hotkeys now also read the physical key, so B works on any layout. The log now shows the ask key and the keyboard layout at start-up.
+- Made with AI assistance (Claude).
+
 ## 1.3.3
 - Fix: lowering Woodcutting's MaxLevel no longer cuts your stored level. MaxLevel now only caps the effects; the stored level is kept.
 - Fix: Woodcutting progress now also has the never-decreasing backup the other skills have (JuanBerta.Obenseuer.SkillsPack.progress.txt), so a missing, older or reset woodcutting.json cannot lose it.

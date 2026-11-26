@@ -331,7 +331,7 @@ namespace ScamArtistMod
 			SkillHost.Tick();
 			try
 			{
-				if (LedgerKey.Value.IsDown() && SkillHost.InGame) SetLedger(!ledgerOpen);
+				if (SkillsPackMod.KeyUtil.IsDown(LedgerKey.Value) && SkillHost.InGame) SetLedger(!ledgerOpen);
 				else if (ledgerOpen && Input.GetKeyDown(KeyCode.Escape)) closeAtLateUpdate = true;   // keep blocking Esc this frame
 				if (Time.unscaledTime < nextTick) return;
 				nextTick = Time.unscaledTime + 2f;

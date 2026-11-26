@@ -86,7 +86,7 @@ namespace BriberyPlusMod
 			if (!SkillsPackMod.SkillsPack.Use("BriberyPlus", this)) return;   // Skills Pack: per-skill on/off
 			Bind(Config);
 			SkillHost.Init(this, Logger, null, "BriberyPlus_Save", go => go.AddComponent<BriberyPlusSave>());
-			Logger.LogInfo("Bribery+ loaded.");
+			Logger.LogInfo("Bribery+ loaded. Ask key: " + AskKey.Value + ", keyboard layout: " + SkillsPackMod.KeyUtil.LayoutName() + ".");
 		}
 
 		private static ConfigDescription D(string text, int order, AcceptableValueBase range = null) { return CustomSkill.D(text, order, range); }
@@ -242,7 +242,7 @@ namespace BriberyPlusMod
 			SkillHost.Tick();
 			try
 			{
-				if (!AskKey.Value.IsDown()) return;
+				if (!SkillsPackMod.KeyUtil.IsDown(AskKey.Value)) return;
 				Target? t = Current();
 				if (t == null)
 				{
