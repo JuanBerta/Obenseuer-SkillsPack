@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using BepInEx;
@@ -290,7 +290,7 @@ namespace BriberyPlusMod
 			}
 			if (Save == null) return;
 			Save.SetDaily("ask@" + t.id, 1f);
-			try { CharacterHeadController.PlayerMadeNoise(); } catch (Exception) { }
+			try { var nm = AccessTools.Method(typeof(CharacterHeadController), "PlayerMadeNoise"); if (nm != null) nm.Invoke(null, null); } catch (Exception) { }
 
 			float fail = FailChance(t);
 			bool ok = PlayerStats.instance.SkillSuccess(PlayerStats.PlayerSkillType.Bribery, fail, false, XpFactor.Value);

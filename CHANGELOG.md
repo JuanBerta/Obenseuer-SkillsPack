@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 1.3.5
+- Fix: Bribery+ did nothing on game versions that lack the CharacterHeadController.PlayerMadeNoise method (it threw an error every time you pressed the ask key). It now skips that step when the method is missing.
+- Made with AI assistance (Claude).
+
 ## 1.3.4
 - Fix: the Bribery+ ask key (B) and the Scam Artist ledger key did nothing on non-English keyboard layouts (for example Russian), because the old Unity key check follows the typed letter. Hotkeys now also read the physical key, so B works on any layout. The log now shows the ask key and the keyboard layout at start-up.
 - Made with AI assistance (Claude).
