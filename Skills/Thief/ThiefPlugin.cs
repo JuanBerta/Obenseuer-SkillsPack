@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using BepInEx;
 using BepInEx.Configuration;
@@ -105,7 +105,7 @@ namespace ThiefMod
 			FenceRepPerOc = cfg.Bind("Fences", "RapportPer100Oc", 6f, D("Rapport gained (0 to 100) per 100 OC of stolen goods sold to a fence.", 80, new AcceptableValueRange<float>(0f, 50f)));
 
 			Pickpocket = cfg.Bind("Pickpocketing", "Enabled", true, D("Press the key while looking at a person to pick their pocket.", 100));
-			PickpocketKey = cfg.Bind("Pickpocketing", "Key", new KeyboardShortcut(KeyCode.P), D("Pickpocket key.", 95));
+			PickpocketKey = cfg.Bind("Pickpocketing", "Key", new KeyboardShortcut(KeyCode.Y), D("Pickpocket key.", 95));
 			PpDistance = cfg.Bind("Pickpocketing", "MaxDistance", 1.8f, D("How close you must be, in meters.", 90, new AcceptableValueRange<float>(0.5f, 5f)));
 			PpBase = cfg.Bind("Pickpocketing", "BaseChance", 0.3f, D("Chance before skill, sleep, gear and state.", 85, new AcceptableValueRange<float>(0f, 1f)));
 			PpSleeping = cfg.Bind("Pickpocketing", "SleepingBonus", 0.4f, D("Added chance when the person is asleep.", 80, new AcceptableValueRange<float>(0f, 1f)));
@@ -117,7 +117,7 @@ namespace ThiefMod
 			PpSeverity = cfg.Bind("Pickpocketing", "CaughtSeverity", 60, D("Crime severity when the person catches you (theft, with them as the victim).", 50, new AcceptableValueRange<int>(1, 500)));
 
 			Shoplift = cfg.Bind("Shoplifting", "Enabled", true, D("With a shop open, press the key to try to palm something from the shelf.", 100));
-			ShopliftKey = cfg.Bind("Shoplifting", "Key", new KeyboardShortcut(KeyCode.L), D("Shoplift key (works while a trader's window is open).", 95));
+			ShopliftKey = cfg.Bind("Shoplifting", "Key", new KeyboardShortcut(KeyCode.U), D("Shoplift key (works while a trader's window is open).", 95));
 			SlBase = cfg.Bind("Shoplifting", "BaseChance", 0.35f, D("Chance before gear and the value of the item.", 90, new AcceptableValueRange<float>(0f, 1f)));
 			SlGloves = cfg.Bind("Shoplifting", "GlovesBonus", 0.05f, D("Added chance while carrying Thief's Gloves.", 80, new AcceptableValueRange<float>(0f, 1f)));
 			SlShoes = cfg.Bind("Shoplifting", "ShoesBonus", 0.05f, D("Added chance while carrying Soft-soled Shoes.", 70, new AcceptableValueRange<float>(0f, 1f)));
