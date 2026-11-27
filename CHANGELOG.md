@@ -5,7 +5,7 @@
 - Made with AI assistance (Claude).
 
 ## 1.4.0
-- New: Sauna Assist. Auto-löyly throws water on the stones for you while you are in a hot sauna and keeps the löyly at a level you set. The overheat guard stops throwing and warns you before the heat starts to hurt (it scales with your Sauna skill), and can switch the stove off. A small HUD shows temperature, löyly and overheat. Farm mode aims for a much higher löyly, so Sauna skill grows as fast as is safe. Left Alt+J toggles auto-löyly, Left Alt+K toggles farm mode (both can be changed). It never touches the sauna contest.
+- New: Sauna Assist. Auto-löyly throws water on the stones for you while you are in a hot sauna and keeps the löyly at a level you set. The overheat guard stops throwing and warns you before the heat starts to hurt (it scales with your Sauna skill), and can switch the stove off. A small HUD shows temperature, löyly and overheat. Farm mode aims for a much higher löyly, so Sauna skill grows as fast as is safe. O toggles auto-löyly, U toggles farm mode (both can be changed). It never touches the sauna contest.
 - Made with AI assistance (Claude).
 
 ## 1.3.5
