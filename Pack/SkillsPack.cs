@@ -8,11 +8,11 @@ using BepInEx.Logging;
 using UnityEngine;
 
 [assembly: AssemblyTitle("Obenseuer-SkillsPack")]
-[assembly: AssemblyDescription("Skills Pack for Obenseuer: Scavenger, Haggling, Bribery+, Stealth, Scam Artist and Lockpick Learning, Woodcutting and XP Tiers in one mod.")]
+[assembly: AssemblyDescription("Skills Pack for Obenseuer: Scavenger, Haggling, Bribery+, Stealth, Scam Artist and Lockpick Learning, Woodcutting, XP Tiers and Sauna Assist in one mod.")]
 [assembly: AssemblyCompany("JuanBerta")]
 [assembly: AssemblyProduct("Obenseuer Skills Pack")]
-[assembly: AssemblyVersion("1.3.5.0")]
-[assembly: AssemblyFileVersion("1.3.5.0")]
+[assembly: AssemblyVersion("1.4.0.0")]
+[assembly: AssemblyFileVersion("1.4.0.0")]
 
 namespace SkillsPackMod
 {
@@ -23,7 +23,7 @@ namespace SkillsPackMod
 	/// </summary>
 	internal static class SkillsPack
 	{
-		public const string Version = "1.3.5";
+		public const string Version = "1.4.0";
 
 		private static ConfigFile cfg;
 		private static ManualLogSource log;
@@ -39,6 +39,7 @@ namespace SkillsPackMod
 			new[] { "LockpickLearning", "Lockpick Learning: the Lockpicking skill grows faster from failed attempts and when drunk or high." },
 			new[] { "Woodcutting", "Woodcutting: a skill that makes your axe chop faster and your trees give more wood." },
 			new[] { "XPTiers", "XP Tiers: recipes give more skill XP the rarer their result is, and mining, jobs, sauna, drinking and building give much more XP." },
+			new[] { "SaunaAssist", "Sauna Assist: auto-l\u00f6yly, an overheat guard, a sauna HUD and a Sauna skill farm mode." },
 		};
 
 		private static void Init()
