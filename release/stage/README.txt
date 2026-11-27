@@ -12,6 +12,7 @@ Skill mods for Obenseuer in one BepInEx 6 mod. It replaces the separate Scavenge
 | **Fraud** (Scam Artist) | Scam invoices that play out over days, with odds on the invoice, a scam ledger (F7), follow-ups, investigations, and frozen accounts that unfreeze on their own after 7 days. |
 | **Woodcutting** | Chop trees and logs with an axe to level up (10 by default, a setting): faster, harder swings and extra wood per tree. Levels by XP (1000 per level, like the game's skills); drinking makes some hits clumsy misses that give more XP, mushrooms boost your level. Each save slot has its own level, shown in the Character tab. |
 | **XP Tiers** | Recipe skill XP scales with how valuable the result is (4 tiers, planting included); mining, jobs, sauna, drinking and furniture blueprints give several times more XP. Every number is a setting. |
+| **Sauna Assist** | Throws water on the stones for you (auto-löyly) and keeps the löyly at a level you set. An overheat guard stops before the heat hurts you (it scales with your Sauna skill) and can switch the stove off. A small HUD shows temperature, löyly and overheat. Farm mode aims for a higher löyly so Sauna skill grows as fast as is safe. Insert toggles auto-löyly, End farm mode. |
 
 ## Coming from the separate mods
 
