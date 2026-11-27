@@ -1,6 +1,8 @@
 # Changelog
 
 ## 1.5.0
+- Changed default keys that clashed with the game or other mods: Bribery+ ask key B is now Backspace (B is the game's Head Use), Scam Artist ledger F7 is now F11 (F7 is Player Shop). Existing settings files keep your old key until you change it.
+
 - New: Thief module. Six new items (Lock Pick Set, Master Lock Pick Set, Bolt Cutters, Stealth Bag, Thief's Gloves, Soft-soled Shoes) with recipes at the Machining and Sewing stations, and the Crowbar now opens locks. Lockpicking is a percentage roll with no minigame: the lock shows your real chance, the tool works by itself and better tools raise the chance, work faster, break less (bolt cutters and the crowbar are quick but loud). Heat: crimes build heat, which makes shops charge more and fences pay less and falls each day. Fences: traders who buy stolen goods pay more as you sell them stolen items. Pickpocketing (P, look at a person) and shoplifting (L, with a shop open). Gloves, shoes and the bag are carried or worn for their effects. Every number is a setting and the module has its own on/off switch. The new items reuse existing art.
 - Made with AI assistance (Claude).
 

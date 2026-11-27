@@ -72,7 +72,7 @@ namespace ScamArtistMod
 
 		private static void Bind(ConfigFile cfg)
 		{
-			LedgerKey = cfg.Bind("General", "LedgerKey", new KeyboardShortcut(KeyCode.F7), D("Opens the scam ledger: your scams, their letters, and what you can do about investigations.", 100));
+			LedgerKey = cfg.Bind("General", "LedgerKey", new KeyboardShortcut(KeyCode.F11), D("Opens the scam ledger: your scams, their letters, and what you can do about investigations.", 100));
 			ShowTooltip = cfg.Bind("General", "ShowOddsOnInvoice", true, D("Show the odds, payout and company on a scam invoice's tooltip.", 90));
 			ShowAtMailbox = cfg.Bind("General", "ShowOddsAtMailbox", true, D("Show your best odds when you look at a mailbox with scam invoices on you.", 80));
 

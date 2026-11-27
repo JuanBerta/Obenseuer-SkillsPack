@@ -6,11 +6,11 @@ Skill mods for Obenseuer in one BepInEx 6 mod. It replaces the separate Scavenge
 |---|---|
 | **Scavenging** (Scavenger) | Search trash to level up; higher levels find more, and better, loot. Gear and light matter. Level 10: Trash King. |
 | **Haggling** | XP from trading; up to 12% better buy and sell prices. Level 10: Silver Tongue (traders buy stolen goods). |
-| **Bribery+** | Look at a person and press B to ask for money, using the game's Bribery skill. |
+| **Bribery+** | Look at a person and press Backspace to ask for money, using the game's Bribery skill. |
 | **Lockpick Learning** | The game's own Lockpicking skill grows faster from failed attempts (FailureShare) and when drunk or high (ImpairedBonus). |
-| **Thief** | New stealing items and features: lock pick sets, bolt cutters, stealth bag, gloves and soft-soled shoes; lockpicking by percentage (no minigame); heat; fences; pickpocketing (Y) and shoplifting (U). |
+| **Thief** | New stealing items and features: lock pick sets, bolt cutters, stealth bag, gloves and soft-soled shoes; lockpicking by percentage (no minigame); heat; fences; pickpocketing and shoplifting (Delete key). |
 | **Stealth** | XP for stealing, lockpicking and trespassing unseen; people and cameras notice you less. Level 10: Shadow. |
-| **Fraud** (Scam Artist) | Scam invoices that play out over days, with odds on the invoice, a scam ledger (F7), follow-ups, investigations, and frozen accounts that unfreeze on their own after 7 days. |
+| **Fraud** (Scam Artist) | Scam invoices that play out over days, with odds on the invoice, a scam ledger (F11), follow-ups, investigations, and frozen accounts that unfreeze on their own after 7 days. |
 | **Woodcutting** | Chop trees and logs with an axe to level up (10 by default, a setting): faster, harder swings and extra wood per tree. Levels by XP (1000 per level, like the game's skills); drinking makes some hits clumsy misses that give more XP, mushrooms boost your level. Each save slot has its own level, shown in the Character tab. |
 | **XP Tiers** | Recipe skill XP scales with how valuable the result is (4 tiers, planting included); mining, jobs, sauna, drinking and furniture blueprints give several times more XP. Every number is a setting. |
 | **Sauna Assist** | Throws water on the stones for you (auto-löyly) and keeps the löyly at a level you set. An overheat guard stops before the heat hurts you (it scales with your Sauna skill) and can switch the stove off. A small HUD shows temperature, löyly and overheat. Farm mode aims for a higher löyly so Sauna skill grows as fast as is safe. Insert toggles auto-löyly, End farm mode. |

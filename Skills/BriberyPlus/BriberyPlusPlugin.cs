@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using BepInEx;
@@ -94,7 +94,7 @@ namespace BriberyPlusMod
 		private static void Bind(ConfigFile cfg)
 		{
 			Enabled = cfg.Bind("General", "Enabled", true, D("Turn Bribery+ on or off.", 100));
-			AskKey = cfg.Bind("General", "AskKey", new KeyboardShortcut(KeyCode.B), D("Key to ask the person you're looking at for money.", 90));
+			AskKey = cfg.Bind("General", "AskKey", new KeyboardShortcut(KeyCode.Backspace), D("Key to ask the person you're looking at for money.", 90));
 			ShowPrompt = cfg.Bind("General", "ShowPrompt", true, D("Show a hint under the crosshair when you look at someone you can ask.", 80));
 			ShowChance = cfg.Bind("General", "ShowChance", true, D("Show your chance of success in the hint.", 70));
 			MaxDistance = cfg.Bind("General", "MaxDistance", 3f, D("How close you must be, in meters.", 60, new AcceptableValueRange<float>(1f, 10f)));
