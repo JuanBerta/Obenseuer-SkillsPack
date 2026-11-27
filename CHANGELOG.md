@@ -1,4 +1,8 @@
-﻿# Changelog
+# Changelog
+
+## 1.5.0
+- New: Thief module. Six new items (Lock Pick Set, Master Lock Pick Set, Bolt Cutters, Stealth Bag, Thief's Gloves, Soft-soled Shoes) with recipes at the Machining and Sewing stations, and the Crowbar now opens locks. Lockpicking is a percentage roll with no minigame: the lock shows your real chance, the tool works by itself and better tools raise the chance, work faster, break less (bolt cutters and the crowbar are quick but loud). Heat: crimes build heat, which makes shops charge more and fences pay less and falls each day. Fences: traders who buy stolen goods pay more as you sell them stolen items. Pickpocketing (P, look at a person) and shoplifting (L, with a shop open). Gloves, shoes and the bag are carried or worn for their effects. Every number is a setting and the module has its own on/off switch. The new items reuse existing art.
+- Made with AI assistance (Claude).
 
 ## 1.4.1
 - XP Tiers: crafting XP now depends on how the craft went. In the vanilla game the XP of a craft grows with its fail chance, so a drunk crafter who fails a lot earned more than a sober one who succeeds. Now a successful craft pays more (SuccessMultiplier, 2.5) and a failed one less (FailedMultiplier, 0.3), and the fail chance used for XP ignores the alcohol in your blood (IgnoreDrunkness). New settings OutcomeXP, IgnoreDrunkness, SuccessMultiplier and FailedMultiplier under Recipes; OutcomeXP off gives back the vanilla behaviour.

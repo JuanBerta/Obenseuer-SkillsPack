@@ -1,4 +1,4 @@
-﻿# Obenseuer Skills Pack
+# Obenseuer Skills Pack
 
 Skill mods for Obenseuer in one BepInEx 6 mod. It replaces the separate Scavenger, Haggling, Bribery+, Stealth and Scam Artist mods, and includes Woodcutting.
 
@@ -8,6 +8,7 @@ Skill mods for Obenseuer in one BepInEx 6 mod. It replaces the separate Scavenge
 | **Haggling** | XP from trading; up to 12% better buy and sell prices. Level 10: Silver Tongue (traders buy stolen goods). |
 | **Bribery+** | Look at a person and press B to ask for money, using the game's Bribery skill. |
 | **Lockpick Learning** | The game's own Lockpicking skill grows faster from failed attempts (FailureShare) and when drunk or high (ImpairedBonus). |
+| **Thief** | New stealing items and features: lock pick sets, bolt cutters, stealth bag, gloves and soft-soled shoes; lockpicking by percentage (no minigame); heat; fences; pickpocketing (P) and shoplifting (L). |
 | **Stealth** | XP for stealing, lockpicking and trespassing unseen; people and cameras notice you less. Level 10: Shadow. |
 | **Fraud** (Scam Artist) | Scam invoices that play out over days, with odds on the invoice, a scam ledger (F7), follow-ups, investigations, and frozen accounts that unfreeze on their own after 7 days. |
 | **Woodcutting** | Chop trees and logs with an axe to level up (10 by default, a setting): faster, harder swings and extra wood per tree. Levels by XP (1000 per level, like the game's skills); drinking makes some hits clumsy misses that give more XP, mushrooms boost your level. Each save slot has its own level, shown in the Character tab. |
