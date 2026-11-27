@@ -1,11 +1,11 @@
 ﻿# Changelog
 
 ## 1.4.1
-- XP Tiers: crafting XP now depends on how the craft went. In the vanilla game the XP of a craft grows with its fail chance, so a drunk crafter who fails a lot earned more than a sober one who succeeds. Now a successful craft pays more (SuccessMultiplier, 1.5) and a failed one less (FailedMultiplier, 0.4), and the fail chance used for XP ignores the alcohol in your blood (IgnoreDrunkness). New settings OutcomeXP, IgnoreDrunkness, SuccessMultiplier and FailedMultiplier under Recipes; OutcomeXP off gives back the vanilla behaviour.
+- XP Tiers: crafting XP now depends on how the craft went. In the vanilla game the XP of a craft grows with its fail chance, so a drunk crafter who fails a lot earned more than a sober one who succeeds. Now a successful craft pays more (SuccessMultiplier, 2.5) and a failed one less (FailedMultiplier, 0.3), and the fail chance used for XP ignores the alcohol in your blood (IgnoreDrunkness). New settings OutcomeXP, IgnoreDrunkness, SuccessMultiplier and FailedMultiplier under Recipes; OutcomeXP off gives back the vanilla behaviour.
 - Made with AI assistance (Claude).
 
 ## 1.4.0
-- New: Sauna Assist. Auto-löyly throws water on the stones for you while you are in a hot sauna and keeps the löyly at a level you set. The overheat guard stops throwing and warns you before the heat starts to hurt (it scales with your Sauna skill), and can switch the stove off. A small HUD shows temperature, löyly and overheat. Farm mode aims for a much higher löyly, so Sauna skill grows as fast as is safe. O toggles auto-löyly, U toggles farm mode (both can be changed). It never touches the sauna contest.
+- New: Sauna Assist. Auto-löyly throws water on the stones for you while you are in a hot sauna and keeps the löyly at a level you set. The overheat guard stops throwing and warns you before the heat starts to hurt (it scales with your Sauna skill), and can switch the stove off. A small HUD shows temperature, löyly and overheat. Farm mode aims for a much higher löyly, so Sauna skill grows as fast as is safe. Insert toggles auto-löyly, End toggles farm mode (both can be changed). It never touches the sauna contest.
 - Made with AI assistance (Claude).
 
 ## 1.3.5

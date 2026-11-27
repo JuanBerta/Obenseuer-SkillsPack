@@ -41,8 +41,8 @@ namespace XPTiersMod
 			Overrides = Config.Bind("Recipes", "Overrides", "", "Fix a recipe's tier by hand: Recipe name=tier, separated by ; (for example: Gin=4;Boiled egg=1). Names as shown in the game.");
 			OutcomeXP = Config.Bind("Recipes", "OutcomeXP", true, "Crafting XP depends on how the craft went: a success pays SuccessMultiplier, a failed craft pays FailedMultiplier. In the vanilla game the XP of a craft grows with its fail chance, so a drunk or under-skilled crafter who fails a lot earns more than a sober one who succeeds. Off = vanilla.");
 			IgnoreDrunk = Config.Bind("Recipes", "IgnoreDrunkness", true, "Crafting XP is worked out from the fail chance you would have sober, so being drunk no longer pays more XP.");
-			SuccessXP = Config.Bind("Recipes", "SuccessMultiplier", 1.5f, new ConfigDescription("XP multiplier for a craft that succeeds (on top of the tier). 1 = vanilla.", new AcceptableValueRange<float>(0f, 20f)));
-			FailedXP = Config.Bind("Recipes", "FailedMultiplier", 0.4f, new ConfigDescription("XP multiplier for a craft that fails (on top of the tier). 1 = vanilla.", new AcceptableValueRange<float>(0f, 20f)));
+			SuccessXP = Config.Bind("Recipes", "SuccessMultiplier", 2.5f, new ConfigDescription("XP multiplier for a craft that succeeds (on top of the tier). 1 = vanilla.", new AcceptableValueRange<float>(0f, 20f)));
+			FailedXP = Config.Bind("Recipes", "FailedMultiplier", 0.3f, new ConfigDescription("XP multiplier for a craft that fails (on top of the tier). 1 = vanilla.", new AcceptableValueRange<float>(0f, 20f)));
 			Mining = Config.Bind("Activities", "Mining", 8f, new ConfigDescription("Multiplier for skill from mining and chopping (the game gives 0.005 per hit).", new AcceptableValueRange<float>(0f, 50f)));
 			Jobs = Config.Bind("Activities", "Jobs", 3f, new ConfigDescription("Multiplier for skill from timed jobs (waiting work). Jobs that need a higher skill give more on top of this.", new AcceptableValueRange<float>(0f, 50f)));
 			Sauna = Config.Bind("Activities", "Sauna", 6f, new ConfigDescription("Multiplier for Sauna skill while you are in a hot sauna.", new AcceptableValueRange<float>(0f, 50f)));

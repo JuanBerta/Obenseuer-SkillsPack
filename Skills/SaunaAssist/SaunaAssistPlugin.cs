@@ -38,8 +38,8 @@ namespace SaunaAssistMod
 			GuardPercent = Config.Bind("Overheat guard", "StopAtPercent", 0.85f, new ConfigDescription("Stop throwing water and warn you once your overheat reaches this share of the level where the heat starts to hurt (that level rises with your Sauna skill). 1 = right at the damage level.", new AcceptableValueRange<float>(0.3f, 1f)));
 			StoveOffAtLimit = Config.Bind("Overheat guard", "TurnStoveOffAtLimit", false, "Also switch the stove off when you reach the guard level. The sauna cools down on its own, and you turn the stove back on yourself.");
 			ShowHud = Config.Bind("HUD", "Show", true, "Show the sauna's temperature, loyly and your overheat on screen while you are in a sauna.");
-			AutoKey = Config.Bind("Keys", "ToggleAuto", new KeyboardShortcut(KeyCode.O), "Turns auto-loyly on or off. The game uses almost every key (even with Alt held), so these defaults are two it leaves free.");
-			FarmKey = Config.Bind("Keys", "ToggleFarm", new KeyboardShortcut(KeyCode.U), "Turns farm mode on or off.");
+			AutoKey = Config.Bind("Keys", "ToggleAuto", new KeyboardShortcut(KeyCode.Insert), "Turns auto-loyly on or off. The game and the other mods use most letter and function keys, so these defaults are two that stay free.");
+			FarmKey = Config.Bind("Keys", "ToggleFarm", new KeyboardShortcut(KeyCode.End), "Turns farm mode on or off.");
 			Logger.LogInfo("Sauna Assist loaded.");
 		}
 
