@@ -19,6 +19,7 @@ namespace SaunaAssistMod
 	public class SaunaAssistPlugin : BaseUnityPlugin
 	{
 		internal static ConfigEntry<bool> AutoLoyly, FarmMode, ShowHud, StoveOffAtLimit;
+		internal static ConfigEntry<float> HudLeft, HudTop;
 		internal static ConfigEntry<float> NormalLoyly, FarmLoyly, GuardPercent;
 		internal static ConfigEntry<KeyboardShortcut> AutoKey, FarmKey;
 
@@ -38,6 +39,8 @@ namespace SaunaAssistMod
 			GuardPercent = Config.Bind("Overheat guard", "StopAtPercent", 0.85f, new ConfigDescription("Stop throwing water and warn you once your overheat reaches this share of the level where the heat starts to hurt (that level rises with your Sauna skill). 1 = right at the damage level.", new AcceptableValueRange<float>(0.3f, 1f)));
 			StoveOffAtLimit = Config.Bind("Overheat guard", "TurnStoveOffAtLimit", false, "Also switch the stove off when you reach the guard level. The sauna cools down on its own, and you turn the stove back on yourself.");
 			ShowHud = Config.Bind("HUD", "Show", true, "Show the sauna's temperature, loyly and your overheat on screen while you are in a sauna.");
+			HudLeft = Config.Bind("HUD", "Left", 1f, new ConfigDescription("Where the sauna box sits, as a percent of the screen width from the left edge.", new AcceptableValueRange<float>(0f, 85f)));
+			HudTop = Config.Bind("HUD", "Top", 30f, new ConfigDescription("Where the sauna box sits, as a percent of the screen height from the top. The game's notifications use the top-left corner, so the default is lower down.", new AcceptableValueRange<float>(0f, 85f)));
 			AutoKey = Config.Bind("Keys", "ToggleAuto", new KeyboardShortcut(KeyCode.Insert), "Turns auto-loyly on or off. The game and the other mods use most letter and function keys, so these defaults are two that stay free.");
 			FarmKey = Config.Bind("Keys", "ToggleFarm", new KeyboardShortcut(KeyCode.End), "Turns farm mode on or off.");
 			Logger.LogInfo("Sauna Assist loaded.");
@@ -122,8 +125,9 @@ namespace SaunaAssistMod
 				if (flash) t += (t.Length > 0 ? "\n" : "") + note;
 				if (t.Length == 0) return;
 				int lines = t.Split('\n').Length;
-				GUI.Box(new Rect(16, 16, 250, 20 + 21 * lines), "", box);
-				GUI.Label(new Rect(26, 22, 240, 40 + 21 * lines), t, label);
+				float hx = Screen.width * HudLeft.Value / 100f, hy = Screen.height * HudTop.Value / 100f;
+				GUI.Box(new Rect(hx, hy, 250, 20 + 21 * lines), "", box);
+				GUI.Label(new Rect(hx + 10, hy + 6, 240, 40 + 21 * lines), t, label);
 			}
 			catch (Exception) { }
 		}

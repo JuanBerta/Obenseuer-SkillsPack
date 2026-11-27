@@ -1,4 +1,8 @@
-# Changelog
+﻿# Changelog
+
+## 1.5.1
+- Sauna Assist: the sauna box no longer sits on top of the game's notifications in the top-left corner. It now starts at the left edge, 30% down the screen, and you can move it with the new HUD Left and HUD Top settings (percent of the screen).
+- Pickpocket and shoplift keys are Delete (the 1.5.0 notes said P and L).
 
 ## 1.5.0
 - Changed default keys that clashed with the game or other mods: Bribery+ ask key B is now Backspace (B is the game's Head Use), Scam Artist ledger F7 is now Keypad 0 (F7 is Player Shop; the game itself uses F11 and F12 for screenshots). Existing settings files keep your old key until you change it.
