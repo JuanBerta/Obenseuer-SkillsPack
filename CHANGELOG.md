@@ -1,5 +1,8 @@
 ﻿# Changelog
 
+## 1.5.2
+- Sauna Assist: new Smart mode (on by default). It works out the löyly for you from the game's own overheat formula: the highest level that still lets you stay StayMinutes (default 30 game minutes) before your overheat reaches the guard level. It follows your Sauna skill, the stove's temperature and the overheat you already have, so it rises as your skill rises. SmartMax (default 6) caps it. Turn Smart off to use the fixed Target instead. Farm mode still uses its own target.
+
 ## 1.5.1
 - Sauna Assist: the sauna box no longer sits on top of the game's notifications in the top-left corner. It now starts at the left edge, 30% down the screen, and you can move it with the new HUD Left and HUD Top settings (percent of the screen).
 - Pickpocket and shoplift keys are Delete (the 1.5.0 notes said P and L).
